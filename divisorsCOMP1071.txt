@@ -83,10 +83,6 @@ copy 	DAT 000
 step 	DAT 000
 
 
-#fix outputting count when odd
-#optimise
-
-
 
 
 
