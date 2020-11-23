@@ -1,0 +1,156 @@
+	IN  input 	#inputs the numbers they want to find divisors of
+	BRZ invalid	#stops the code running if input is zero
+	STO copy 
+	STO input
+	SUB one #check if input is one
+	BRZ end
+	LDA one
+	OUT
+	STO divisor
+	LDA zero
+	STO count
+
+check	LDA count
+	ADD one
+	STO count
+	LDA input	#loads input ready for division
+	SUB two #subtracts first divisor (this is repeated)
+	STO input #stores updated number
+	BRZ true	#stops the loop if reached zero (is a divisor)
+	BRP check
+	LDA two
+	BR stored
+true 	LDA two
+	OUT 
+	LDA divisor
+	ADD one
+	STO divisor
+	LDA one 
+stored	STO step
+
+nextDivisor	LDA divisor
+loop	ADD step
+	STO divisor
+	LDA copy
+	STO input	
+c	LDA input	#loads input ready for division
+	SUB divisor #subtracts first divisor (this is repeated)
+	STO input #stores updated number
+	BRZ found	#stops the loop if reached zero (is a divisor)
+	BRP c	#any negative number will not be a complete division
+	LDA divisor
+	SUB count
+	BRZ finished
+	BRP oddPrint
+	LDA divisor
+	BR loop
+found	LDA divisor
+	OUT
+	LDA count
+	SUB divisor 
+	BRP nextDivisor
+	BR finished
+
+invalid	LDA zero
+	OUT
+	HLT
+end 	LDA one
+	OUT
+	HLT
+
+
+oddPrint LDA copy
+	OUT
+	HLT
+
+finished LDA copy
+	SUB divisor
+	BRZ stop
+	LDA copy
+	OUT
+stop	HLT
+	#LDA copy
+	#OUT
+	#HLT
+
+input 	DAT 000
+divisor DAT 001
+count 	DAT 000
+zero 	DAT 000
+one	DAT 001
+two 	DAT 002
+copy 	DAT 000
+step 	DAT 000
+
+
+#fix outputting count when odd
+#optimise
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
